@@ -1,0 +1,2 @@
+const char* ssid = "FunBox2-7ADB";
+const char* password = "FF5E7C3CA56222F92D2A153A57";

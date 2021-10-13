@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
+
+namespace 
+{
+    public class Client
+    {
+        ////////////////////////////////////////////////////////////
+        public string login { get; set; }
+        public NetworkStream sn { get; private set; }
+        public StreamReader sr  { get; private set;  }
+        public StreamWriter sw { get; private set; }
+        public Socket ClientSocket { get;}
+        ////////////////////////////////////////////////////////////
+        public Client(Socket accept)
+        {
+            ClientSocket = accept;
+            StreamConfig();
+        }
+
+        void StreamConfig()
+        {
+            sn = new NetworkStream(ClientSocket);
+            sr = new StreamReader(sn);
+            sw = new StreamWriter(sn);
+            sw.AutoFlush = true;
+        }
+
+        public string GetMessage()
+        {
+            return sr.ReadLine();
+        }
+
+        public void SendMessage(string message)
+        {
+            sw.WriteLine(message);
+        }
+
+        public void Disconnect(Client client)
+        {
+            if (client.sr != null) client.sr.Close();
+            if (client.sw != null) client.sw.Close();
+            if (client.sn != null) client.sn.Close();
+            if (client != null) client.ClientSocket.Close();
+        }
+
+    }
+}

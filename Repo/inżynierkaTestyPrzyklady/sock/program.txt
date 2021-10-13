@@ -1,0 +1,15 @@
+﻿using System;
+using System.Threading;
+
+namespace ŁucjaDybek_ProjektTCP_IP
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            UserInterface tak = new UserInterface();
+            tak.CreateServer();
+            Console.Read();
+        }
+    }
+}

@@ -1,0 +1,171 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
+
+namespace 
+{
+    public class Server
+    {
+        /////////POLA KLASY////////////////////////////////////////
+        ///////////////////////////////////////////////////////////
+        private Socket server;
+        private IPEndPoint endPoint;
+        public List<Client> clientList { get; }
+        public bool active { get; private set; }
+        private Thread listener;
+        private Thread creatingLogin;
+        private Thread messageCenter;
+        ///////////////////////////////////////////////////////////
+      
+        public Server(IPAddress ip, int port)
+        {
+            endPoint = new IPEndPoint(ip, port);
+            server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
+            listener = new Thread(Accept);
+            clientList = new List<Client>();
+
+        }
+
+        public void Start()
+        {
+            server.Bind(endPoint);
+            server.Listen(1);
+            listener.Start();
+            active = true;
+
+            messageCenter = new Thread(MessageCenter);
+
+        }
+
+        void MessageCenter(object client)
+        {
+            string message;
+            do
+            {
+                message = ((Client)client).GetMessage();
+                //OTWIERA COMMAND WINDOW DLA UZYTKOWNIKA, KTORY TEGO CHCE
+                if (message == "/help")
+                {
+                    ((Client)client).SendMessage("COMMAND HELP: \r\n- /w [login] - whisper \r\n- /quit - quit chat \r\n- /help - open command help");
+                }
+                else
+                {
+                    ClientLoop(message, (Client)client);
+                }
+            } while (message != null && message != "/quit");
+            //ELEMENT ODPOWIEDZIALNY ZA ROZLACZENIE KLIENTA W PRZYPADKU ZAMKNIECIA ORAZ KOMENDY WYJSCIA
+            ((Client)client).Disconnect(((Client)client));
+            ListRemoving(((Client)client));
+        }
+
+        void ClientLoop(string message, Client client)
+        {
+            foreach (var item in clientList)
+            {
+                //ELEMENT ODPOWIEDZIALNY ZA WYSLANIE KOMUNIKATU O WYJSCIU KLIENTA
+                if (message == null || message == "/quit")
+                {
+                    item.SendMessage($"\r\n{(client).login} has left the chat.");
+                }
+                //ELEMENT ODPOWIEDZIALNY ZA WHISPER
+                else if (message.StartsWith("/w "))
+                {
+                    Whisper(message, item, client);
+                }
+                //ELEMENT ODPOWIEDZIALNY ZA WYSYLANIE WIADOMOSCI DO WSZYSTKICH 
+                else if (item.login != (client).login)
+                {
+                    item.SendMessage($"\r\n{DateTime.Now.ToString("g")} \r\n{(client).login}: {message}");
+                }
+
+            }
+        }
+
+        void Whisper(string message, Client item, Client client)
+        {
+            string[] split; //TABLICA SKLADOWYCH WIADOMOSCI
+            string login;
+
+            split = message.Split(" ");
+            login = split[1]; //LOGIN MUSI BYC 2 SLOWEM GDYZ TEGO WYMAGA KOMENDA
+
+            //ELEMENT ODPOWIEDZIALNY ZA SKLADANIE WIADOMOSCI W TRYBIE WHISPER ORAZ JEJ WYSLANIE
+            if (item.login == login)
+            {
+                string newMessage = "";
+
+                for (int i = 2; i < split.Length; i++)
+                {
+                    newMessage += split[i] + " ";
+                }
+                item.SendMessage($"\r\n{DateTime.Now.ToString("g")} \r\n{((Client)client).login} whispers: {newMessage}");
+            }
+
+        }
+
+        public void ListRemoving(Client client)
+        {
+            clientList.Remove(client);
+        }
+
+        void Accept()
+        {
+            do
+            {
+                var client = new Client(server.Accept());
+                creatingLogin = new Thread(ClientLogin);
+                creatingLogin.Start(client);
+            } while (true);
+        }
+
+        void ClientLogin(object client)
+        {
+            bool exists;
+            do
+            {
+                ((Client)client).SendMessage("Create your login: ");
+                string login = ((Client)client).GetMessage();
+                exists = LoginExists(login);
+                //SPRAWDZA CZY LOGIN JEST WOLNY I WPROWADZA UZYTKOWNIKA DO CHATU
+                if (!exists)
+                {
+                    ((Client)client).login = login;
+                    clientList.Add(((Client)client));
+                    ((Client)client).SendMessage($"|||||||||||||Connected to server. Welcome {((Client)client).login}! |||||||||||||");
+                    ((Client)client).SendMessage("COMMAND HELP: \r\n- /w [login] - whisper \r\n- /quit - quit chat \r\n- /help - open command help");
+                    ((Client)client).SendMessage("|||||||||||||ENJOY|||||||||||||");
+
+                    new Thread(MessageCenter).Start(client);
+
+
+                }
+                //INFORMUJE O ZAJETYM LOGINIE
+                else
+                {
+                    ((Client)client).SendMessage("This login is unavilable. Try again.");
+
+
+                }
+            } while (exists);
+
+        }
+
+        bool LoginExists(string login)
+        {
+            //FLAGA DLA PRZYPISYWANIA LOGINOW
+            foreach (var item in clientList)
+            {
+                if (item.login == login)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+}

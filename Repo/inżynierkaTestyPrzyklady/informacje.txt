@@ -1,0 +1,58 @@
+I. Proszê zapoznaæ siê z dokumentami:
+- Regulamin studiów:
+https://bip.polsl.pl/Dokumenty_nowe/Zal.M.2019.162.US.59_Regulamin_studiow.pdf
+- procedura SZJK P-RIB-2.1 Projekt in¿ynierski + formularz oceny
+http://www-arch.polsl.pl/Wydzialy/RIB/Strony/SystemZapewnieniaJako%C5%9BciKszta%C5%82cenia.aspx
+(niewykluczone ¿e to siê zmieni od paŸdziernika, ale zawsze jest to jakas dodatkowa informacja)
+
+II. Dodatkowe regulacje prowadz¹cego projekt:
+- samodzielna praca studenta, prowadz¹cy daje ew. wskazówki, ale nie wykonuje pracy za studenta,
+- przewiduje siê najwy¿ej 2 czytania "ksi¹¿ki" przed ostatecznym oddaniem pracy, do sprawdzenia nale¿y przekazaæ skoñczone rozdzia³y (a nie ich fragmenty), najlepiej ca³¹ pracê, a jeœli jej fragmenty to w blokach: rozdzia³y 1-2 oraz 3-6 (patrz ni¿ej)
+- co ok. 2 tyg. wskazane jest raportowanie postêpów, lecz nie jest to obligatoryjne, jeœli student jest bardzo samodzielny,
+- coœ na kszta³t karty postêpów w projekcie bêdzie wype³niane pomimo, ¿e nie jest wymagane
+
+III. Uk³ad ksi¹¿ki jest nieco odmienny od wzorca (formatki):
+
+strona tytu³owa (zgodna ze wzorcem z Dziekanatu/BOS)
+
+oœwiadczenia itp wymagane przez Dziekanat/BOS
+
+spis treœci
+
+spisy rysunków, tabel, akronimów, itp. (o ile potrzebne)
+
+1. Wstêp (1-2 str.) 
+ - uzasadnienie dlaczego takim tematem trzeba siê zaj¹æ (trochê lanie wody ale bez przesady - nale¿y przekonaæ czytelnika, ¿e temat jest na tyle istotny, ¿e warto siê go podj¹æ).
+1.1 Cele pracy
+ - wypunktowaæ co nale¿y osi¹gn¹æ, tak aby w podsumowaniu pracy siê do zak³adanych celów odnieœæ.
+
+2 Analiza zagadnienia (7-15 str.)
+ - rozwiniêcie tematyki ze wstêpu, odniesienia do istniej¹cych rozwi¹zañ oraz technologii, metod itp. elementów wykorzystanych w rozwi¹zaniu. Podzia³ na sekcje zwi¹zane z g³ównymi zagadnieniami poruszanymi w rozdziale, np. 
+2.1 Istniej¹ce rozwi¹zania 
+2.1.1 produkt firmy A, 
+2.1.2 produkt firmy B, 
+..., 
+2.2 Oczekiwania u¿ytkowników 
+2.3 Koncepcja rozwi¹zania (odniesienie siê do wad/zalet rozwi¹zañ obecnych, oczekiwañ u¿ytkowników, w tym krótki opis technologii, które planuje siê wykorzystaæ)
+
+3 Specyfikacja wewnêtrzna (5-7 str.)
+ - struktura programistyczna projektu, najlepiej dzieliæ rozdzia³ zgodnie z hierarchi¹ projektu, klas, sk³adowych. Osobny podrozdzia³ o strukturze bazy danych (jeœli obecna). Jeœli mo¿na - wstawiaæ diagramy klas i/lub UMLe. Opis na wzglêdnie wysokim poziomie ogólnoœci (nie opisywaæ ka¿dej linii kodu). Mo¿liwe przyk³ady autorskich lub bardziej interesuj¹cych fragmentów kodu wraz z opisem.
+
+4. Specyfikacja zewnêtrzna (5-7 str.)
+ - instrukcja obs³ugi wraz z ekranami i opisem, nie wg³êbiaæ siê w kwestie implementacyjne (u¿ytkownika zwykle to nie obchodzi). Podaæ wymagania, ew. sposób instalacji i konfiguracji oraz informacje niezbêdne do uruchomienia projektu. Jeœli jest tego za du¿o - zamieœciæ pe³n¹ instrukcjê na CD, a w ksi¹¿ce tylko najwa¿niejsze elementy.
+
+5. Testowanie i wyniki (3-7 str.)
+ - przyk³adowe scenariusze testowe i wyniki testowania potwierdzaj¹ce pracê stworzonego rozwi¹zania zgodnie z za³o¿eniami, wyniki testów wykonanych przez u¿ytkowników, ich opinie, zauwa¿one niedoci¹gniêcia. Ew. odniesienie siê do wyników osi¹galnych w ju¿ istniej¹cych rozwi¹zaniach.
+
+Ka¿dy z rozdzia³ów 2-5 mo¿e koñczyæ siê te¿ krótkim podsumowaniem (max 0,5 str.)
+ 
+6. Podsumowanie (1-2 str.)
+ - podsumowanie pracy, co zrobiono, odniesienie siê do zak³adanych celów i uzasadnienie, ¿e zosta³y one osi¹gniête, dalsze mo¿liwoœci rozwoju projektu.
+
+Literatura/Bibliografia
+ - ok. 10 pozycji (lepiej wiêcej ni¿ mniej), raczej publikacje z renomowanych czasopism lub ksi¹¿ek, mog¹ byæ Ÿród³a elektroniczne, ale rzetelne (unikaæ wikipedii, forum na onecie, itp).
+
+Dodatki
+- zgodnie z wymaganiami z dziekanatu/BOS - np. lista u¿ytego oprogramowania wraz z informacjami o licencjach (o szczegó³y proszê pytaæ w dziekanacie/BOS),
+- inne wg w³asnego uznania, ale nie przesadzaæ - praca ma mieæ ok. 35-40 str (ca³oœæ)
+- p³yta CD/DVD z elektroniczn¹ wersj¹ pracy + wszystkimi kodami Ÿród³owymi (chyba, ¿e praca lub jej elementy stanowi¹ tajemnicê np. firmy, na zlecenie której powsta³ temat pracy).

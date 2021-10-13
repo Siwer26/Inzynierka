@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Text;
+
+namespace ŁucjaDybek_ProjektTCP_IP
+{
+    public class UserInterface
+    {
+        Server server;
+        public void CreateServer()
+        {
+            server = new Server(IPAddress.Parse("127.0.0.1"), 1000);
+            server.Start();
+        }
+
+        public bool Activity()
+        {
+            return server.active;
+        }
+
+        public int ConnectedNumber()
+        {
+            return server.clientList.Count;
+        }
+
+
+
+    }
+}
